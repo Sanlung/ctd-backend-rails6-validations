@@ -37,7 +37,7 @@ class CustomersController < ApplicationController
       flash.notice = 'The cusotmer record was created successfully.'
       redirect_to @customer
     else
-      flash.now.alert = cutomer.error.full_messages.to_sentence
+      flash.now.alert = @customer.errors.full_messages.to_sentence
       render :new
     end
   end

@@ -20,7 +20,7 @@ RSpec.describe 'CustomersControllers', type: :request do
     end
   end
   describe 'get new_customer_path' do
-    it 'enders the :new template' do
+    it 'renders the :new template' do
       get new_customer_path
       expect(response).to render_template(:new)
     end
@@ -52,7 +52,7 @@ RSpec.describe 'CustomersControllers', type: :request do
       customer = FactoryBot.create(:customer)
       customer_attributes = FactoryBot.attributes_for(:customer)
       put customer_path(customer.id), params: { customer: customer_attributes }
-      customer.reload
+      expect(customer_attributes[:phone]).to eq(Customer.last.phone.to_i)
       expect(response).to redirect_to customer_path(id: customer.id)
     end
   end

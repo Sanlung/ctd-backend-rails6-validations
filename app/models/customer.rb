@@ -1,4 +1,6 @@
 class Customer < ApplicationRecord
+  has_many :orders, dependent: :destroy
+
   validates :first_name, :last_name, :phone, :email, presence: true
   validates :phone, numericality: { only_integer: true }
   validates :phone, length: { is: 10 }

@@ -1,7 +1,7 @@
 <%= form_with(model: customer) do |form| %>
   <% if customer.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+      <h5><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h5>
 
       <ul>
         <% customer.errors.each do |error| %>
@@ -11,27 +11,51 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+  <% if current_page?(new_customer_path) %>
+    <div class="row">
+      <div class="form-group col-6 col-md">
+  <% else %>
+    <div class="card-body">
+      <div class="form-group">
+  <% end %>
+      <%= form.label :first_name %>
+      <%= form.text_field :first_name, class: "form-control form-control-sm", autofocus: true %>
+    </div>
+
+    <% if current_page?(new_customer_path) %>
+      <div class="form-group col-6 col-md">
+    <% else %>
+      <div class="form-group">
+    <% end %>
+      <%= form.label :last_name %>
+      <%= form.text_field :last_name, class: "form-control form-control-sm" %>
+    </div>
+
+    <% if current_page?(new_customer_path) %>
+      <div class="form-group col-6 col-md">
+    <% else %>
+      <div class="form-group">
+    <% end %>
+      <%= form.label :phone %>
+      <%= form.text_field :phone, class: "form-control form-control-sm", placeholder: "10 digits..." %>
+    </div>
+
+    <% if current_page?(new_customer_path) %>
+      <div class="form-group col-6 col-md">
+    <% else %>
+      <div class="form-group">
+    <% end %>
+      <%= form.label :email %>
+      <%= form.text_field :email, class: "form-control form-control-sm", placeholder: "name@example.com" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit class: 'btn btn-outline-primary btn-sm' %>
+    <% if current_page?(new_customer_path) %>
+      <%= link_to 'Cancel', customers_path, class: 'btn btn-outline-primary btn-sm', role: 'button' %>
+    <% else %>
+      <%= link_to 'Cancel', customer_path(customer), class: 'btn btn-outline-primary btn-sm', role: 'button' %>
+    <% end %>
   </div>
 <% end %>

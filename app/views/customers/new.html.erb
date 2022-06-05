@@ -1,5 +1,6 @@
-<h1>New Customer</h1>
+<%= content_for :card_or_form do %>
+  <h5>New Customer</h5>
+  <%= render 'form', customer: @customer %>
+<% end %>
 
-<%= render 'form', customer: @customer %>
-
-<%= link_to 'Customers', customers_path %>
+<%= render template: 'customers/index' %>

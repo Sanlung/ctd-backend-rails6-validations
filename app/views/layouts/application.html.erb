@@ -1,16 +1,84 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Validations</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Customer Track</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application','data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="min-vh-100 d-flex flex-column justify-content-start">
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+      <div class="container">
+        <%= link_to customers_path class: "navbar-brand" do %>
+          <%= image_tag 'logo.svg', alt: 'Site logo', size: '40x40', class: 'img-fluid' %>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown dmenu">
+              <a
+                class="nav-link dropdown-toggle text-light"
+                href="#"
+                id="navbardrop"
+                data-toggle="dropdown"
+              >
+                Customers
+              </a>
+              <div class="dropdown-menu sm-menu">
+                <%= link_to 'List Customers', customers_path, class: "dropdown-item"
+                %>
+                <%= link_to 'New Customer', new_customer_path, class:
+                "dropdown-item" %>
+              </div>
+            </li>
+            <li class="nav-item dropdown dmenu">
+              <a
+                class="nav-link dropdown-toggle text-light"
+                href="#"
+                id="navbardrop"
+                data-toggle="dropdown"
+              >
+                Orders
+              </a>
+              <div class="dropdown-menu sm-menu">
+                <%= link_to 'List Orders', orders_path, class: "dropdown-item" %>
+                <%= link_to 'New Order', new_order_path, class: "dropdown-item" %>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron-fluid text-center text-white py-5">
+      <div class="container pt-5 pb-3">
+        <h1 class="display-4 mb-3">Customer Track</h1>
+        <p class="lead">A customer and order management system</p>
+        <p>
+          This application is built with Ruby on Rails as a student project for the Code the Dream School.
+        </p>
+        <%= link_to 'Learn Rails', 'https://guides.rubyonrails.org/index.html', class: 'btn btn-danger btn-lg', role: 'button' %>
+      </div>
+    </div>
+
+    <% if !flash[:alert].nil? %>
+      <p class="my_alert"><%= flash[:alert] %></p>
+    <% end %>
+
     <%= yield %>
+
+    <footer class="row bg-primary text-white py-3 mt-auto">
+      <div class="container">
+        <div class="col-md-7"> </div>
+        <div class="col-md text-md-left">
+          &copy; <%= Date.today.year %> Customer Track
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

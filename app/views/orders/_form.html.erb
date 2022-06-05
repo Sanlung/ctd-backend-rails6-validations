@@ -1,7 +1,7 @@
 <%= form_with(model: order) do |form| %>
   <% if order.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+      <h5><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h5>
 
       <ul>
         <% order.errors.each do |error| %>
@@ -11,21 +11,49 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :product_name %>
-    <%= form.text_field :product_name %>
-  </div>
+  <% if current_page?(new_order_path) %>
+    <div class="row">
+      <div class="form-group col-6 col-sm-4">
+  <% else %>
+    <div class="card-body">
+      <div class="form-group">
+  <% end %>
+      <%= form.label :product_name %>
+      <%= form.text_field :product_name, class: "form-control form-control-sm", autofocus: true %>
+    </div>
 
-  <div class="field">
-    <%= form.label :product_count %>
-    <%= form.text_field :product_count %>
-  </div>
+    <% if current_page?(new_order_path) %>
+      <div class="form-group col-6 col-sm-4">
+    <% else %>
+      <div class="form-group">
+    <% end %>
+      <%= form.label :product_count %>
+      <%= form.text_field :product_count, class: "form-control form-control-sm" %>
+    </div>
 
-  <div class="field">
-    <%= form.collection_select :customer_id, Customer.all, :id, :full_name, include_blank: true %>
-  </div>
+    <% if current_page?(new_order_path) %>
+      <div class="form-group col-5 col-sm-4">
+    <% else %>
+      <div class="form-group">
+    <% end %>
+      <%= form.label 'Customer' %>
+      <%= form.collection_select :customer_id, Customer.all, :id, :full_name, include_blank: true, class: "form-control form-control-sm" %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <% if current_page?(new_order_path) %>
+      <div class="mt-auto mb-3 col-7">
+    <% else %>
+      </div>
+      <div class="mb-3">
+    <% end %>
+      <%= form.submit class: 'btn btn-outline-primary btn-sm' %>
+      <% if current_page?(new_order_path) %>
+        <%= link_to 'Cancel', orders_path, class: 'btn btn-outline-primary btn-sm', role: 'button' %>
+      <% else %>
+        <%= link_to 'Cancel', order_path(order), class: 'btn btn-outline-primary btn-sm', role: 'button' %>
+      <% end %>
+    </div>
+  <% if current_page?(new_order_path) %>
+    </div>
+  <% end %>
 <% end %>

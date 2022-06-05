@@ -1,12 +1,11 @@
 class OrdersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   before_action :set_order, only: %i[show edit update destroy]
-  layout 'customer_layout'
+  before_action :set_orders, only: %i[index new]
+  before_action :set_customer, only: %i[show edit]
 
   # GET /orders or /orders.json
-  def index
-    @orders = Order.all
-  end
+  def index; end
 
   # GET /orders/1 or /orders/1.json
   def show; end
@@ -54,8 +53,16 @@ class OrdersController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
+  def set_orders
+    @orders = Order.all
+  end
+
   def set_order
     @order = Order.find(params[:id])
+  end
+
+  def set_customer
+    @customer = Customer.find(@order.customer_id)
   end
 
   # Only allow a list of trusted parameters through.

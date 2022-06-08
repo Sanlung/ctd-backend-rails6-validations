@@ -1,5 +1,30 @@
 <%= content_for :card_or_form do %>
   <h5>New Order</h5>
+
+  <%= content_for :inner_wrap do %>
+    <div class="row">
+  <% end %>
+
+  <%= content_for :col_style do %>
+    <div class="form-group col-6 col-sm-4">
+  <% end %>
+
+  <%= content_for :col_style1 do %>
+    <div class="form-group col-5 col-sm-4">
+  <% end %>
+
+  <%= content_for :col_style2 do %>
+    <div class="mt-auto mb-3 col-7">
+  <% end %>
+
+  <%= content_for :cancel_btn do %>
+    <%= link_to 'Cancel', orders_path, class: 'btn btn-outline-primary btn-sm', role: 'button' %>
+  <% end %>
+
+  <%= content_for :col_style3 do %>
+    </div>
+  <% end %>
+
   <%= render 'form', order: @order %>
 <% end %>
 

@@ -11,49 +11,26 @@
     </div>
   <% end %>
 
-  <% if current_page?(new_order_path) %>
-    <div class="row">
-      <div class="form-group col-6 col-sm-4">
-  <% else %>
-    <div class="card-body">
-      <div class="form-group">
-  <% end %>
+  <%= yield :inner_wrap %>
+    <%= yield :col_style %>
       <%= form.label :product_name %>
       <%= form.text_field :product_name, class: "form-control form-control-sm", autofocus: true %>
     </div>
 
-    <% if current_page?(new_order_path) %>
-      <div class="form-group col-6 col-sm-4">
-    <% else %>
-      <div class="form-group">
-    <% end %>
+    <%= yield :col_style %>
       <%= form.label :product_count %>
       <%= form.text_field :product_count, class: "form-control form-control-sm" %>
     </div>
 
-    <% if current_page?(new_order_path) %>
-      <div class="form-group col-5 col-sm-4">
-    <% else %>
-      <div class="form-group">
-    <% end %>
+    <%= yield :col_style1 %>
       <%= form.label 'Customer' %>
       <%= form.collection_select :customer_id, Customer.all, :id, :full_name, include_blank: true, class: "form-control form-control-sm" %>
     </div>
 
-    <% if current_page?(new_order_path) %>
-      <div class="mt-auto mb-3 col-7">
-    <% else %>
-      </div>
-      <div class="mb-3">
-    <% end %>
+    <%= yield :col_style2 %>
       <%= form.submit class: 'btn btn-outline-primary btn-sm' %>
-      <% if current_page?(new_order_path) %>
-        <%= link_to 'Cancel', orders_path, class: 'btn btn-outline-primary btn-sm', role: 'button' %>
-      <% else %>
-        <%= link_to 'Cancel', order_path(order), class: 'btn btn-outline-primary btn-sm', role: 'button' %>
-      <% end %>
+      <%= yield :cancel_btn %>
     </div>
-  <% if current_page?(new_order_path) %>
-    </div>
-  <% end %>
+
+  <%= yield :col_style3 %>
 <% end %>

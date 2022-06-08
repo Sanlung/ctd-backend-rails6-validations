@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   before_action :set_order, only: %i[show edit update destroy]
-  before_action :set_orders, only: %i[index new]
-  before_action :set_customer, only: %i[show edit]
+  before_action :set_orders, only: %i[index new create]
+  before_action :set_customer, only: %i[show edit update]
 
   # GET /orders or /orders.json
   def index; end

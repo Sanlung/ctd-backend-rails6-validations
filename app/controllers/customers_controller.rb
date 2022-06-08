@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   before_action :set_customer, only: %i[show edit update destroy]
-  before_action :set_customers, only: %i[index new]
+  before_action :set_customers, only: %i[index new create]
 
   # GET /customers or /customers.json
   def index; end

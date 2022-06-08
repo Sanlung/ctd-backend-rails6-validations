@@ -25,6 +25,28 @@
         </div>
       <% else %>
         <h5 class="card-title">Edit Order</h5>
+
+        <%= content_for :inner_wrap do %>
+          <div class="card-body">
+        <% end %>
+
+        <%= content_for :col_style do %>
+          <div class="form-group">
+        <% end %>
+
+        <%= content_for :col_style1 do %>
+          <div class="form-group">
+        <% end %>
+
+        <%= content_for :col_style2 do %>
+          </div>
+          <div class="mb-3">
+        <% end %>
+
+        <%= content_for :cancel_btn do %>
+          <%= link_to 'Cancel', order_path(@order), class: 'btn btn-outline-primary btn-sm', role: 'button' %>
+        <% end %>
+
         <%= render 'form', order: @order %>
       <% end %>
     </div>

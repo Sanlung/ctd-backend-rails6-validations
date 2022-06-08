@@ -27,6 +27,19 @@
         </div>
       <% else %>
         <h5 class="card-title">Edit Customer</h5>
+
+        <%= content_for :inner_wrap do %>
+          <div class="card-body">
+        <% end %>
+
+        <%= content_for :col_style do %>
+          <div class="form-group">
+        <% end %>
+
+        <%= content_for :cancel_btn do %>
+          <%= link_to 'Cancel', customer_path(@customer), class: 'btn btn-outline-primary btn-sm', role: 'button' %>
+        <% end %>
+
         <%= render 'form', customer: @customer %>
       <% end %>
     </div>

@@ -11,40 +11,25 @@
     </div>
   <% end %>
 
-  <% if current_page?(new_customer_path) %>
-    <div class="row">
-      <div class="form-group col-6 col-md">
-  <% else %>
-    <div class="card-body">
-      <div class="form-group">
-  <% end %>
+  <%= yield :inner_wrap %>
+    <%= yield :col_style %>
       <%= form.label :first_name %>
       <%= form.text_field :first_name, class: "form-control form-control-sm", autofocus: true %>
     </div>
 
-    <% if current_page?(new_customer_path) %>
-      <div class="form-group col-6 col-md">
-    <% else %>
-      <div class="form-group">
-    <% end %>
+    <%= yield :col_style %>
       <%= form.label :last_name %>
       <%= form.text_field :last_name, class: "form-control form-control-sm" %>
     </div>
 
-    <% if current_page?(new_customer_path) %>
-      <div class="form-group col-6 col-md">
-    <% else %>
-      <div class="form-group">
-    <% end %>
+
+    <%= yield :col_style %>
       <%= form.label :phone %>
       <%= form.text_field :phone, class: "form-control form-control-sm", placeholder: "10 digits..." %>
     </div>
 
-    <% if current_page?(new_customer_path) %>
-      <div class="form-group col-6 col-md">
-    <% else %>
-      <div class="form-group">
-    <% end %>
+
+    <%= yield :col_style %>
       <%= form.label :email %>
       <%= form.text_field :email, class: "form-control form-control-sm", placeholder: "name@example.com" %>
     </div>
@@ -52,10 +37,6 @@
 
   <div class="mb-3">
     <%= form.submit class: 'btn btn-outline-primary btn-sm' %>
-    <% if current_page?(new_customer_path) %>
-      <%= link_to 'Cancel', customers_path, class: 'btn btn-outline-primary btn-sm', role: 'button' %>
-    <% else %>
-      <%= link_to 'Cancel', customer_path(customer), class: 'btn btn-outline-primary btn-sm', role: 'button' %>
-    <% end %>
+    <%= yield :cancel_btn %>
   </div>
 <% end %>

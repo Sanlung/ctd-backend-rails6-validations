@@ -1,21 +1,82 @@
-<p id="notice"><%= notice %></p>
+<%= content_for :table_title do %>Order Information<% end %>
 
-<h1>Order</h1>
+<%= content_for :card_or_form do %>
+  <div class="row">
+    <div class="card bg-light p-3 mb-4 mx-auto col">
+      <% if current_page?(order_path) %>
+        <%= image_tag 'order.webp', alt: 'Delivery man', class: 'card-img-top img-fluid' %>
+        <div class="card-body">
+          <p class="d-flex justify-content-between">
+            <strong>Product name:</strong>
+            <%= @order.product_name %>
+          </p>
 
-<p>
-  <strong>Product name:</strong>
-  <%= @order.product_name %>
-</p>
+          <p class="d-flex justify-content-between">
+            <strong>Product count:</strong>
+            <%= @order.product_count %>
+          </p>
 
-<p>
-  <strong>Product count:</strong>
-  <%= @order.product_count %>
-</p>
+          <p class="d-flex justify-content-between">
+            <strong>Customer:</strong>
+            <%= Customer.find(@order.customer_id).full_name %>
+          </p>
 
-<p>
-  <strong>Customer:</strong>
-  <%= Customer.find(@order.customer_id).full_name %>
-</p>
+          <%= link_to 'Edit Order', edit_order_path(@order), class: 'btn btn-outline-primary btn-sm', role: 'button'  %>
+        </div>
+      <% else %>
+        <h5 class="card-title">Edit Order</h5>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Orders', orders_path %> | <%= link_to 'Customer', customer_path(@order.customer_id) %>
+        <%= content_for :inner_wrap do %>
+          <div class="card-body">
+        <% end %>
+
+        <%= content_for :col_style do %>
+          <div class="form-group">
+        <% end %>
+
+        <%= content_for :col_style1 do %>
+          <div class="form-group">
+        <% end %>
+
+        <%= content_for :col_style2 do %>
+          </div>
+          <div class="mb-3">
+        <% end %>
+
+        <%= content_for :cancel_btn do %>
+          <%= link_to 'Cancel', order_path(@order), class: 'btn btn-outline-primary btn-sm', role: 'button' %>
+        <% end %>
+
+        <%= render 'form', order: @order %>
+      <% end %>
+    </div>
+
+    <div class="col-lg">
+<% end %>
+
+<% content_for :table_head do %>
+  <th>Customer</th>
+  <th>Phone</th>
+  <th>Email</th>
+<% end %>
+
+<% content_for :table_body do %>
+  <tr>
+    <td><%= @customer.full_name %></td>
+    <td><%= @customer.phone %></td>
+    <td colspan="2"><%= @customer.email %></td>
+    <td><%= link_to 'Show', @customer, class: 'btn-sm btn-outline-primary', role: 'button' %></td>
+    <td><%= link_to 'Edit', edit_customer_path(@customer), class: 'btn-sm btn-outline-primary', role: 'button' %></td>
+    <td>
+      <%= link_to 'Destroy', @customer, method: :delete, data: { confirm: 'Are you
+      sure?' }, class: 'btn-sm btn-outline-primary', role: 'button' %>
+    </td>
+  </tr>
+<% end %>
+
+<% content_for :new_button do %>
+    </div>
+  </div>
+<% end %>
+
+<%= render partial: 'customers/table' %>

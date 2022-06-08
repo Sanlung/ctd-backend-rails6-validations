@@ -1,7 +1,7 @@
 <%= form_with(model: customer) do |form| %>
   <% if customer.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+      <h5><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h5>
 
       <ul>
         <% customer.errors.each do |error| %>
@@ -11,27 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+  <%= yield :inner_wrap %>
+    <%= yield :col_style %>
+      <%= form.label :first_name %>
+      <%= form.text_field :first_name, class: "form-control form-control-sm", autofocus: true %>
+    </div>
+
+    <%= yield :col_style %>
+      <%= form.label :last_name %>
+      <%= form.text_field :last_name, class: "form-control form-control-sm" %>
+    </div>
+
+
+    <%= yield :col_style %>
+      <%= form.label :phone %>
+      <%= form.text_field :phone, class: "form-control form-control-sm", placeholder: "10 digits..." %>
+    </div>
+
+
+    <%= yield :col_style %>
+      <%= form.label :email %>
+      <%= form.text_field :email, class: "form-control form-control-sm", placeholder: "name@example.com" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit class: 'btn btn-outline-primary btn-sm' %>
+    <%= yield :cancel_btn %>
   </div>
 <% end %>

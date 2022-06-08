@@ -1,0 +1,26 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <h1 class="text-center mb-3">
+    <%= yield :table_title %>
+  </h1>
+
+  <%= yield :card_or_form %>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <%= yield :table_head %>
+          <th colspan="4"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= yield :table_body %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= yield :new_button %>
+</div>

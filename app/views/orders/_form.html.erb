@@ -1,7 +1,7 @@
 <%= form_with(model: order) do |form| %>
   <% if order.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+      <h5><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h5>
 
       <ul>
         <% order.errors.each do |error| %>
@@ -11,21 +11,26 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :product_name %>
-    <%= form.text_field :product_name %>
-  </div>
+  <%= yield :inner_wrap %>
+    <%= yield :col_style %>
+      <%= form.label :product_name %>
+      <%= form.text_field :product_name, class: "form-control form-control-sm", autofocus: true %>
+    </div>
 
-  <div class="field">
-    <%= form.label :product_count %>
-    <%= form.text_field :product_count %>
-  </div>
+    <%= yield :col_style %>
+      <%= form.label :product_count %>
+      <%= form.text_field :product_count, class: "form-control form-control-sm" %>
+    </div>
 
-  <div class="field">
-    <%= form.collection_select :customer_id, Customer.all, :id, :full_name, include_blank: true %>
-  </div>
+    <%= yield :col_style1 %>
+      <%= form.label 'Customer' %>
+      <%= form.collection_select :customer_id, Customer.all, :id, :full_name, include_blank: true, class: "form-control form-control-sm" %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <%= yield :col_style2 %>
+      <%= form.submit class: 'btn btn-outline-primary btn-sm' %>
+      <%= yield :cancel_btn %>
+    </div>
+
+  <%= yield :col_style3 %>
 <% end %>

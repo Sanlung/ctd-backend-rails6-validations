@@ -1,5 +1,19 @@
-<h1>New Customer</h1>
+<%= content_for :card_or_form do %>
+  <h5>New Customer</h5>
 
-<%= render 'form', customer: @customer %>
+  <%= content_for :inner_wrap do %>
+    <div class="row">
+  <% end %>
 
-<%= link_to 'Customers', customers_path %>
+  <%= content_for :col_style do %>
+    <div class="form-group col-6 col-md">
+  <% end %>
+
+  <%= content_for :cancel_btn do %>
+    <%= link_to 'Cancel', customers_path, class: 'btn btn-outline-primary btn-sm', role: 'button' %>
+  <% end %>
+
+  <%= render 'form', customer: @customer %>
+<% end %>
+
+<%= render template: 'customers/index' %>
